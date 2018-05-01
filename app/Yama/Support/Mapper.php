@@ -13,8 +13,8 @@ abstract class Mapper
      * @return array
      */
     abstract public static function single(Model $model): array;
-    
-    
+
+
     /**
      * @param Collection $collection
      *

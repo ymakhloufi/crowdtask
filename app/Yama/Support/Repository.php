@@ -4,8 +4,8 @@ namespace Yama\Support;
 
 use App\Exceptions\RepositoryException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 abstract class Repository
 {
@@ -38,7 +38,7 @@ abstract class Repository
      *
      * @return Collection|Model[]
      */
-    public function all(array $columns = ['*'])
+    public function all(array $columns = ['*']): Collection
     {
         return $this->model->get($columns);
     }
@@ -150,7 +150,7 @@ abstract class Repository
     /**
      * @throws RepositoryException
      */
-    public function makeModel()
+    public function makeModel(): void
     {
         $model = app($this->model());
 
@@ -162,13 +162,13 @@ abstract class Repository
     }
 
 
-    public function unguard()
+    public function unguard(): void
     {
         $this->model->unguard();
     }
 
 
-    public function reguard()
+    public function reguard(): void
     {
         $this->model->reguard();
     }

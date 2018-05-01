@@ -15,12 +15,12 @@ class UserMapperStripped extends Mapper
     public static function single(Model $user): array
     {
         return [
-            'id'          => (int)$user->id,
-            'name'        => (string)$user->name,
-            'gender'      => (string)$user->gender,
-            'role'        => (string)$user->role,
-            'avatar'      => (string)$user->avatar,
-            'description' => (string)$user->description,
+            'id'          => (int) $user->id,
+            'name'        => (string) $user->name,
+            'gender'      => (string) $user->gender,
+            'role'        => (string) $user->role,
+            'avatar'      => (string) $user->avatar,
+            'description' => (string) $user->description,
         ];
     }
 }

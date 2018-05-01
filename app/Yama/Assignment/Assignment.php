@@ -3,92 +3,55 @@
 namespace Yama\Assignment;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Yama\Comment\Comment;
 use Yama\Task\Task;
 use Yama\User\User;
 
 /**
- * Yama\Assignment\Assignment
+ * Assignment
  *
- * @property int    $id
- * @property int    $task_id
- * @property int    $assignee_user_id
- * @property int    $assigner_user_id
- * @property bool   $community_rated
- * @property string $status
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon $deleted_at
+ * @property-read Comment[]|Collection $comments
+ * @property-read User                 $assignee
+ * @property-read User                 $assigner
+ * @property-read Task                 $task
+ * @property int                       $id
+ * @property int                       $task_id
+ * @property int                       $assignee_user_id
+ * @property int                       $assigner_user_id
+ * @property bool                      $community_rated
+ * @property string                    $status
+ * @property Carbon                    $created_at
+ * @property Carbon                    $updated_at
  */
 class Assignment extends Model
 {
-    use SoftDeletes;
-
-    public    $timestamps = true;
-    protected $dates      = ['deleted_at'];
-    protected $fillable   = ['assignee_user_id', 'assigner_user_id', 'task_id', 'approved'];
+    protected $guarded = [];
 
 
-    public function comments()
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
 
-    public function assignee()
+    public function assignee(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assignee_user_id');
     }
 
 
-    public function assigner()
+    public function assigner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigner_user_id');
     }
 
 
-    public function task()
+    public function task(): BelongsTo
     {
         return $this->belongsTo(Task::class);
     }
-
-
-    public function scopeNew(Builder $query)
-    {
-        return $query->where('status', 'new');
-    }
-
-
-    public function scopeRejected(Builder $query)
-    {
-        return $query->where('status', 'rejected');
-    }
-
-
-    public function scopeAccepted(Builder $query)
-    {
-        return $query->where('status', 'accepted');
-    }
-
-
-    public function scopeFulfilled(Builder $query)
-    {
-        return $query->where('status', 'fulfilled');
-    }
-
-
-    public function scopePassed(Builder $query)
-    {
-        return $query->where('status', 'passed');
-    }
-
-
-    public function scopeFailed(Builder $query)
-    {
-        return $query->where('status', 'failed');
-    }
-
 }
