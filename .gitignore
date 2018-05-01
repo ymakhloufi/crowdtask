@@ -1,15 +1,15 @@
+# Dependencies
 /node_modules
-/public/hot
-/public/storage
-/storage/*.key
 /vendor
+
+# Dependency Log Files
+npm-debug.log
+yarn-error.log
+
+# IDE settings, cache and helpers
 /.idea
 .phpstorm.meta.php
 .ide_helper.php
-/.vscode
-/.vagrant
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
+
+# Personal Environment
 .env
