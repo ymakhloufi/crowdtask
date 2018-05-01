@@ -13,24 +13,25 @@ use Yama\Comment\Comment;
 use Yama\Tag\Tag;
 
 
-// ToDo: Finish property-read doc-blocks
-
 /**
  * User
  *
- * @property-read Tag[]|Collection $tags
- * @property-read Tag[]|Collection $tags
- * @property int                   $id
- * @property string                $email
- * @property string                $password
- * @property string                $name
- * @property string                $gender
- * @property string                $role
- * @property string                $avatar
- * @property string                description
- * @property Carbon                $created_at
- * @property Carbon                $updated_at
- * @property Carbon                $deleted_at
+ * @property-read Tag[]|Collection        $tags
+ * @property-read Comment[]|Collection    $assignmentComments
+ * @property-read Comment[]|Collection    $writtenComments
+ * @property-read Assignment[]|Collection $receivedAssignments
+ * @property-read Assignment[]|Collection $issuedAssignments
+ * @property int                          $id
+ * @property string                       $email
+ * @property string                       $password
+ * @property string                       $name
+ * @property string                       $gender
+ * @property string                       $role
+ * @property string                       $avatar
+ * @property string                       description
+ * @property Carbon                       $created_at
+ * @property Carbon                       $updated_at
+ * @property Carbon                       $deleted_at
  */
 class User extends \Illuminate\Foundation\Auth\User
 {
@@ -47,11 +48,11 @@ class User extends \Illuminate\Foundation\Auth\User
 
     public function assignmentComments(): HasMany
     {
-        return $this->comments()->where('commentable_type', 'Assignment');
+        return $this->writtenComments()->where('commentable_type', 'Assignment');
     }
 
 
-    public function comments(): HasMany
+    public function writtenComments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
