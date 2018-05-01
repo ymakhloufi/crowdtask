@@ -14,6 +14,8 @@ return [
     'filename' => '.ide_helper',
     'format'   => 'php',
 
+    'meta_filename' => '.phpstorm.meta.php',
+
     /*
     |--------------------------------------------------------------------------
     | Fluent helpers
@@ -77,8 +79,8 @@ return [
     */
 
     'extra' => [
-        'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
-        'Session'  => ['Illuminate\Session\Store'],
+        //'Eloquent' => array('Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'),
+        'Session' => ['Illuminate\Session\Store'],
     ],
 
     'magic' => [
