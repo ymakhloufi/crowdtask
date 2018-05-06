@@ -10,7 +10,7 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->unique()->index();
+            $table->string('title', 191)->unique()->index();
             $table->timestamps();
         });
     }

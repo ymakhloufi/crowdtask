@@ -9,17 +9,41 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->index();
-            $table->string('email')->unique()->index();
+            $table->string('name', 191)->index();
+            $table->string('email', 191)->unique()->index();
             $table->string('password');
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('role', ['administrator', 'moderator', 'user'])->default('user');
             $table->string('avatar')->nullable()->default(null);
-            $table->text('description')->default('');
+            $table->text('description');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
+
+        $adminPassword = str_random(32);
+
+        $user = Yama\User\User::create([
+            'name'        => 'Administrator',
+            'email'       => 'change-me@example.org',
+            'password'    => Hash::make($adminPassword),
+            'gender'      => 'female',
+            'role'        => 'administrator',
+            'avatar'      => '/img/mallard.jpg',
+            'description' => 'I am the owner of this website!',
+        ]);
+
+        echo "\e[0;30;46m                                                \e[0m\n";
+        echo "\e[0;30;46m  ############################################  \e[0m\n";
+        echo "\e[0;30;46m  ##                                        ##  \e[0m\n";
+        echo "\e[0;30;46m  ## \e[0;30;43m Administrator Username:             \e[0;30;46m  ##  \e[0m\n";
+        echo "\e[0;30;46m  ## \e[1;33;40m   change-me@example.org             \e[0;30;46m  ##  \e[0m\n";
+        echo "\e[0;30;46m  ##                                        ##  \e[0m\n";
+        echo "\e[0;30;46m  ## \e[0;30;43m Administrator Password:             \e[0;30;46m  ##  \e[0m\n";
+        echo "\e[0;30;46m  ## \e[1;33;40m   $adminPassword  \e[0;30;46m  ##  \e[0m\n";
+        echo "\e[0;30;46m  ##                                        ##  \e[0m\n";
+        echo "\e[0;30;46m  ############################################  \e[0m\n";
+        echo "\e[0;30;46m                                                \e[0m\n";
     }
 
 

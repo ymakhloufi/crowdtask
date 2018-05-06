@@ -15,8 +15,8 @@ class CreateAttachmentsTable extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('attachable_id')->unsigned()->index();
-            $table->string('attachable_type')->index();
-            $table->string('path')->unique();
+            $table->string('attachable_type', 191)->index();
+            $table->string('path', 191)->unique();
             $table->string('filetype');
         });
     }
