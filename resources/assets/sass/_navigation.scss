@@ -1,0 +1,33 @@
+.top-nav {
+  padding: 10px;
+  font-size: 12pt;
+  background: linear-gradient(to bottom, #222 0%, #000 100%);
+}
+
+.second-nav {
+  background: linear-gradient(to bottom, #222 0%, #111 100%);
+}
+
+.top-nav .row {
+  height: 27px;
+}
+
+.top-nav .title {
+  font-size: 15pt;
+  white-space: nowrap;
+}
+
+.top-nav .icons-left {
+  padding-left: 25px;
+  margin-top: 3px;
+}
+
+.top-nav .links-right {
+  position: absolute;
+  right: 20px;
+  margin-top: 3px;
+}
+
+.top-nav ul {
+  padding-left: 0;
+}
