@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12" style="max-width: 930px;">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
+                    <div class="card-header">Welcome</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,7 +15,11 @@
                         @endif
 
                         @guest
-                            You must first login!
+                            <div class="row">
+                                @include('auth.login-form')
+                                @include('auth.signup-form')
+
+                            </div>
                         @else
                             <p>You are logged in!</p>
 

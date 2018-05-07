@@ -13502,6 +13502,12 @@ a.text-dark:focus {
   padding-left: 0;
 }
 
+.top-nav a {
+  font-weight: 600;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+}
+
 .btn {
   border-radius: 0;
 }
@@ -13532,6 +13538,30 @@ a.text-dark:focus {
   background: linear-gradient(135deg, #eee, #fff);
 }
 
+input[type=text],
+input[type=password] {
+  border-radius: 0 !important;
+}
+
+.input-group-addon {
+  background-color: #eee;
+  border: 1px solid #ced4da;
+  border-right: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  line-height: 28px;
+  vertical-align: middle;
+  padding: 3px;
+  min-width: 45px;
+  text-align: center;
+}
+
+.input-group-addon label {
+  margin: 0;
+}
+
 html,
 body {
   background-color: #444749;
@@ -13548,9 +13578,6 @@ a:visited,
 a:hover,
 a:active {
   color: #93c;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-transform: uppercase;
   text-decoration: none;
   -webkit-transition: .3s;
   transition: .3s;
@@ -13626,6 +13653,20 @@ a:active {
 @media (min-width: 576px) {
   #navbarContent ul a:not(:last-child) {
     border-right: 1px solid #999;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-left {
+    border-right: 1px solid #ccc;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .login-left {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
   }
 }
 

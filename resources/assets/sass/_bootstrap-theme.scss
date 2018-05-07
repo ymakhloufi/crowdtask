@@ -27,3 +27,26 @@
   color: #333;
   background: linear-gradient(135deg, #eee, #fff);
 }
+
+input[type=text], input[type=password] {
+  border-radius: 0 !important;
+}
+
+.input-group-addon {
+  background-color: #eee;
+  border: 1px solid #ced4da;
+  border-right: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  line-height: 28px;
+  vertical-align: middle;
+  padding: 3px;
+  min-width: 45px;
+  text-align: center;
+}
+
+.input-group-addon label {
+  margin: 0;
+}

@@ -17,9 +17,6 @@ html, body {
 
 a, a:visited, a:hover, a:active {
   color: $link-color;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-transform: uppercase;
   text-decoration: none;
   transition: .3s;
 }
@@ -93,5 +90,19 @@ a:hover, a:active {
 @media (min-width: 576px) {
   #navbarContent ul a:not(:last-child) {
     border-right: 1px solid #999;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-left {
+    border-right: 1px solid #ccc;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .login-left {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
   }
 }

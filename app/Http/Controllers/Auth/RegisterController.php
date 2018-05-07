@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Yama\User\User;
 use Yama\User\UserRepository;
 
 class RegisterController extends Controller
@@ -29,10 +28,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|string|max:32',
-            'email'    => 'required|string|email|max:128|unique:users',
-            'gender'   => 'required|in:male,female',
-            'password' => 'required|string|min:6|confirmed',
+            '_name'     => 'required|string|max:191',
+            '_email'    => 'required|string|email|max:191|unique:users',
+            '_password' => 'required|string|min:6',
         ]);
     }
 
@@ -46,14 +44,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        User::unguard();
         $user = $this->userRepository->create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
-            'gender'   => $data['gender'],
+            'name'  => $data['_name'],
+            'email' => $data['_email'],
         ]);
-        User::reguard();
+
+        $user->password = bcrypt($data['_password']);
+        $user->save();
 
         Mail::send('mail.welcome', ['user' => $user], function (Message $m) use ($user) {
             //$m->from(config('mail.from.address'), config('mail.from.name'));
