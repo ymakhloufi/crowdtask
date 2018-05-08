@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Yama\User\UserRepository;
 
 class CreateUsersTable extends Migration
 {
@@ -11,11 +12,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name', 191)->index();
             $table->string('email', 191)->unique()->index();
-            $table->string('password');
+            $table->string('password')->nullable()->default(null);
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('role', ['administrator', 'moderator', 'user'])->default('user');
             $table->string('avatar')->nullable()->default(null);
-            $table->text('description');
+            $table->text('description')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
@@ -23,15 +24,16 @@ class CreateUsersTable extends Migration
 
         $adminPassword = str_random(32);
 
-        $user = Yama\User\User::create([
+        $user           = app(UserRepository::class)->create([
             'name'        => 'Administrator',
             'email'       => 'change-me@example.org',
-            'password'    => Hash::make($adminPassword),
             'gender'      => 'female',
             'role'        => 'administrator',
             'avatar'      => '/img/mallard.jpg',
             'description' => 'I am the owner of this website!',
         ]);
+        $user->password = bcrypt($adminPassword);
+        $user->save();
 
         echo "\e[0;30;46m                                                \e[0m\n";
         echo "\e[0;30;46m  ############################################  \e[0m\n";

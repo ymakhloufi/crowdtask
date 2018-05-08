@@ -37,7 +37,7 @@ class User extends \Illuminate\Foundation\Auth\User
 {
     use SoftDeletes, Notifiable;
 
-    protected $guarded = [];
+    protected $guarded = ['id', 'password'];
 
 
     public function tags(): BelongsToMany

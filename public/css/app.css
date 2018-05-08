@@ -13658,7 +13658,7 @@ a:active {
 
 @media (min-width: 768px) {
   .login-left {
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #444;
   }
 }
 
@@ -13666,7 +13666,14 @@ a:active {
   .login-left {
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #444;
   }
+}
+
+.guest-welcome-box {
+  max-width: 930px;
+  border-radius: 20px;
+  background-color: #191919;
+  padding: 25px;
 }
 
