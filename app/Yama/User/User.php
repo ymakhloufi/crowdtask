@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use Yama\Assignment\Assignment;
 use Yama\Comment\Comment;
 use Yama\Tag\Tag;
+use Yama\Task\Task;
 
 
 /**
@@ -21,6 +22,7 @@ use Yama\Tag\Tag;
  * @property-read Comment[]|Collection    $writtenComments
  * @property-read Assignment[]|Collection $receivedAssignments
  * @property-read Assignment[]|Collection $issuedAssignments
+ * @property-read Task[]|Collection       $authoredTasks
  * @property int                          $id
  * @property string                       $email
  * @property string                       $password
@@ -43,6 +45,12 @@ class User extends \Illuminate\Foundation\Auth\User
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withPivot('relation');
+    }
+
+
+    public function authoredTasks()
+    {
+        return $this->hasMany(Task::class, 'author_user_id');
     }
 
 

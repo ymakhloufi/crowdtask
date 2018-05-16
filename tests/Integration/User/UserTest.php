@@ -129,8 +129,30 @@ class UserTest extends TestCase
         ]);
 
         // postconditions
-        $user->load('receivedAssignments');
+        $user->load('issuedAssignments');
         $this->assertEquals(1, $user->issuedAssignments()->count());
         $this->assertEquals($assignment->id, $user->issuedAssignments()->first()->id);
+    }
+
+
+    public function testAuthoredTasks()
+    {
+        // prepare
+        /** @var User $user */
+        $user = factory(User::class)->create();
+
+        // preconditions
+        $this->assertFalse($user->authoredTasks()->exists());
+
+        // action
+        $assignment = $user->authoredTasks()->create([
+            'title'       => $this->faker->sentence,
+            'description' => $this->faker->sentence,
+        ]);
+
+        // postconditions
+        $user->load('authoredTasks');
+        $this->assertEquals(1, $user->authoredTasks()->count());
+        $this->assertEquals($assignment->id, $user->authoredTasks()->first()->id);
     }
 }
