@@ -1,7 +1,3 @@
-.btn {
-  border-radius: 0;
-}
-
 .btn-primary {
   background-color: #93c;
   border-color: #93c;
@@ -12,23 +8,7 @@
   border-color: #529;
 }
 
-.card {
-  border-radius: 0;
-  border: 0;
-}
-
-.card-header {
-  border-radius: 0 !important;
-  background-color: #222;
-}
-
-.card-body {
-  border-radius: 0;
-  color: #333;
-  background: linear-gradient(135deg, #eee, #fff);
-}
-
-input[type=text], input[type=password] {
+input, button, textarea {
   border-radius: 0 !important;
 }
 

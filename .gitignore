@@ -13,3 +13,7 @@ yarn-error.log
 
 # Personal Environment
 .env
+
+# Front-End Builds
+public/css/app.css
+public/js/app.jsg
