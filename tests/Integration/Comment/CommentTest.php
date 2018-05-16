@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Acceptance\Auth;
+namespace Tests\Integration\Comment;
 
 use Tests\TestCase;
 use Yama\Assignment\Assignment;
