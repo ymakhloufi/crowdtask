@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Acceptance\Auth;
 
 use Tests\TestCase;
 use Yama\User\User;
