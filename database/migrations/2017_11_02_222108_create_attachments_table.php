@@ -18,6 +18,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('attachable_type', 191)->index();
             $table->string('path', 191)->unique();
             $table->string('filetype');
+            $table->timestamps();
         });
     }
 
