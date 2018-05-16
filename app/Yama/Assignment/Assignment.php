@@ -16,7 +16,7 @@ use Yama\User\User;
  * Assignment
  *
  * @property-read Comment[]|Collection    $comments
- * @property-read Attachment[]|Collection $attachment
+ * @property-read Attachment[]|Collection $attachments
  * @property-read User                    $assignee
  * @property-read User                    $assigner
  * @property-read Task                    $task
@@ -26,6 +26,7 @@ use Yama\User\User;
  * @property int                          $assigner_user_id
  * @property bool                         $community_rated
  * @property string                       $status
+ * @property string                       $assignee_text
  * @property Carbon                       $created_at
  * @property Carbon                       $updated_at
  */

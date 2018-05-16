@@ -16,4 +16,4 @@ yarn-error.log
 
 # Front-End Builds
 public/css/app.css
-public/js/app.jsg
+public/js/app.js

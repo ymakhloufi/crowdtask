@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use Yama\Task\Task;
+use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +15,12 @@ use Yama\Task\Task;
 */
 
 /** @noinspection PhpUndefinedVariableInspection */
-$factory->define(Yama\Assignment\Assignment::class, function (Faker $faker) {
-    $taskId = Task::query()->inRandomOrder()->pluck('id')->first()
-            ?? factory(Task::class)->create()->id;
-
+$factory->define(Yama\Task\Task::class, function (Faker $faker) {
     return [
-        'task_id'          => $taskId,
-        'assignee_user_id' => null,
-        'assigner_user_id' => null,
-        'community_rated'  => true,
-        'status'           => 'new',
+        'author_user_id' => null,
+        'title'          => $faker->sentence,
+        'description'    => $faker->sentence,
+        'private'        => false,
+        'approved_at'    => Carbon::now()->toDateTimeString(),
     ];
 });

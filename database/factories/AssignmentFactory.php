@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Yama\Task\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,16 @@ use Faker\Generator as Faker;
 */
 
 /** @noinspection PhpUndefinedVariableInspection */
-$factory->define(Yama\User\User::class, function (Faker $faker) {
+$factory->define(Yama\Assignment\Assignment::class, function (Faker $faker) {
+    $taskId = Task::query()->inRandomOrder()->pluck('id')->first()
+              ?? factory(Task::class)->create()->id;
+
     return [
-        'name'           => $faker->name,
-        'email'          => $faker->unique()->safeEmail,
-        'password'       => bcrypt("myPassword"),
-        'remember_token' => str_random(10),
-        'gender'         => $faker->randomElement(['male', 'female']),
-        'role'           => 'user',
-        'avatar'         => $faker->imageUrl(),
-        'description'    => $faker->sentence,
+        'task_id'          => $taskId,
+        'assignee_user_id' => null,
+        'assigner_user_id' => null,
+        'community_rated'  => true,
+        'status'           => 'new',
+        'assignee_text'    => $faker->sentence,
     ];
 });
