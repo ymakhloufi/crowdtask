@@ -113,4 +113,23 @@ class AssignmentTest extends TestCase
         $this->assertEquals($task->id, $assignment->task->id);
         $this->assertEquals($task->id, $assignment->task_id);
     }
+
+
+    public function testGetRating()
+    {
+        // prepare
+        /** @var Assignment $assignment */
+        $assignment = factory(Assignment::class)->create();
+
+        // preconditions
+        $this->assertNull($assignment->getRating());
+
+        // action
+        $assignment->comments()->create(['text' => 'blah', 'rating' => 2]);
+        $assignment->comments()->create(['text' => 'blah again', 'rating' => 3]);
+
+        // postconditions
+        $assignment->load('comments');
+        $this->assertEquals(2.5, $assignment->getRating());
+    }
 }
