@@ -5,6 +5,8 @@ namespace Tests\Acceptance\Auth;
 use Tests\TestCase;
 use Yama\Assignment\Assignment;
 use Yama\Attachment\Attachment;
+use Yama\Comment\Comment;
+use Yama\Task\Task;
 
 class AttachmentTest extends TestCase
 {
@@ -12,9 +14,7 @@ class AttachmentTest extends TestCase
     {
         // prepare
         /** @var Attachment $attachment */
-        /** @var Assignment $assignment */
-        $assignment = factory(Assignment::class)->create();
-        $attachment = $assignment->attachments()->create(['path' => '/path/file.jpeg', 'filetype' => 'image/jpeg']);
+        $attachment = factory(Attachment::class)->create();
 
         // preconditions
         $this->assertFalse($attachment->comments()->exists());
@@ -29,26 +29,24 @@ class AttachmentTest extends TestCase
     }
 
 
-    public function testTaskRelation()
+    public function testAttachableRelation()
     {
         // prepare
-        /** @var Assignment $assignment */
         /** @var Attachment $attachment */
-        $assignment    = factory(Assignment::class)->create();
-        $newAssignment = factory(Assignment::class)->create();
-        $attachment    = $assignment->attachments()->create(['path' => '/path/file.jpeg', 'filetype' => 'image/jpeg']);
+        $attachable = factory($this->faker->randomElement([Assignment::class, Task::class, Comment::class]))->create();
+        $attachment = factory(Attachment::class)->create();
 
         // preconditions
-        $this->assertNotEquals($newAssignment->id, $attachment->attachable_id);
-        $this->assertNotEquals($newAssignment->id, $attachment->attachable->id);
+        $this->assertNotEquals($attachable->id, $attachment->attachable_id);
+        $this->assertNotEquals($attachable->id, $attachment->attachable->id);
 
         // action
-        $attachment->attachable()->associate($newAssignment);
+        $attachment->attachable()->associate($attachable);
 
         // postconditions
         $attachment->load('attachable');
         $this->assertTrue($attachment->attachable()->exists());
-        $this->assertEquals($newAssignment->id, $attachment->attachable->id);
-        $this->assertEquals($newAssignment->id, $attachment->attachable_id);
+        $this->assertEquals($attachable->id, $attachment->attachable->id);
+        $this->assertEquals($attachable->id, $attachment->attachable_id);
     }
 }
