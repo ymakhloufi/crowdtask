@@ -48,7 +48,7 @@ class User extends \Illuminate\Foundation\Auth\User
 
     public function assignmentComments(): HasMany
     {
-        return $this->writtenComments()->where('commentable_type', 'Assignment');
+        return $this->writtenComments()->where('commentable_type', Assignment::class);
     }
 
 
