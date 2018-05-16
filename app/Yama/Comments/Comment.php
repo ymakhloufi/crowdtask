@@ -20,9 +20,11 @@ use Yama\User\User;
  * @property-read User                    $user
  * @property-read Comment[]|Collection    $replies
  * @property-read Attachment[]|Collection $attachments
+ * @property-read Assignment|Task         $commentable
  * @property int                          $id
  * @property int                          $user_id
- * @property int                          $assignment_id
+ * @property int                          $commentable_id
+ * @property string                       $commentable_type
  * @property string                       $text
  * @property bool                         $rating
  * @property Carbon                       $created_at

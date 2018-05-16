@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Yama\Assignment\Assignment;
 use Yama\Attachment\Attachment;
 use Yama\Comment\Comment;
@@ -17,12 +18,17 @@ use Yama\User\User;
 /**
  * Task
  *
- * @property int    $id
- * @property string $title
- * @property string $description
- * @property int    $author_user_id
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property-read User                    $author
+ * @property-read Comment[]|Collection    $comments
+ * @property-read Tag[]|Collection        $tags
+ * @property-read Attachment[]|Collection $attachments
+ * @property-read Assignment[]|Collection $assignments
+ * @property int                          $id
+ * @property string                       $title
+ * @property string                       $description
+ * @property int                          $author_user_id
+ * @property Carbon                       $created_at
+ * @property Carbon                       $updated_at
  */
 class Task extends Model
 {
