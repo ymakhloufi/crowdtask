@@ -2,6 +2,8 @@
 
 namespace Yama\User;
 
+use App\Yama\Gamification\Badge;
+use App\Yama\Gamification\BadgeRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -29,6 +31,7 @@ use Yama\Task\Task;
  * @property string                       $name
  * @property string                       $gender
  * @property string                       $role
+ * @property int                          $points
  * @property string                       $avatar
  * @property string                       description
  * @property Carbon                       $created_at
@@ -77,4 +80,14 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->hasMany(Assignment::class, 'assigner_user_id');
     }
 
+
+    /**
+     * @return Collection|Badge[]
+     */
+    public function getBadges(): Collection
+    {
+        $badgeTitles = \DB::table('badge_user')->where('user_id', $this->id)->pluck('title');
+
+        return app(BadgeRepository::class)->all()->whereIn('title', $badgeTitles);
+    }
 }

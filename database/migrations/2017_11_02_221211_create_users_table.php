@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable()->default(null);
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('role', ['administrator', 'moderator', 'user'])->default('user');
+            $table->integer('points')->default(0);
             $table->string('avatar')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->rememberToken();
