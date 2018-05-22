@@ -13,7 +13,7 @@ class CreateCommentsTable extends Migration
             $table->integer('commentable_id')->unsigned()->index();
             $table->string('commentable_type', 191)->index();
             $table->integer('user_id')->nullable()->default(null)->unsigned();
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->tinyInteger('rating')->nullable()->unsigned()->index(); // 1-5 "stars"
             $table->timestamps();
 
