@@ -13,6 +13,7 @@ use Yama\Assignment\Assignment;
 use Yama\Attachment\Attachment;
 use Yama\Comment\Comment;
 use Yama\Tag\Tag;
+use Yama\User\GamificationService;
 use Yama\User\User;
 
 /**
@@ -27,12 +28,15 @@ use Yama\User\User;
  * @property string                       $title
  * @property string                       $description
  * @property int                          $author_user_id
+ * @property bool                         $private
+ * @property Carbon                       $approved_at
  * @property Carbon                       $created_at
  * @property Carbon                       $updated_at
  */
 class Task extends Model
 {
     protected $guarded = [];
+    protected $dates   = ['created_at', 'updated_at', 'approved_at'];
 
 
     public function author(): BelongsTo
@@ -62,6 +66,18 @@ class Task extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saved(function (Task $task) {
+            if ($task->approved_at and $task->author_user_id) {
+                app(GamificationService::class)->issueNewBadges($task->author);
+            }
+        });
     }
 
 }

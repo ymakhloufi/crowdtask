@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use Yama\Assignment\Assignment;
 use Yama\Attachment\Attachment;
 use Yama\Task\Task;
+use Yama\User\GamificationService;
 use Yama\User\User;
 
 /**
@@ -56,6 +57,18 @@ class Comment extends Model
     public function attachments(): MorphMany
     {
         return $this->morphMany(Attachment::class, 'attachable');
+    }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Comment $comment) {
+            if ($comment->user_id) {
+                app(GamificationService::class)->issueNewBadges($comment->user);
+            }
+        });
     }
 
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Yama\Attachment\Attachment;
 use Yama\Comment\Comment;
 use Yama\Task\Task;
+use Yama\User\GamificationService;
 use Yama\User\User;
 
 /**
@@ -32,6 +33,15 @@ use Yama\User\User;
  */
 class Assignment extends Model
 {
+    const STATUS = [
+        'new'       => 'new',
+        'rejected'  => 'rejected',
+        'accepted'  => 'accepted',
+        'fulfilled' => 'fulfilled',
+        'passed'    => 'passed',
+        'failed'    => 'failed',
+    ];
+
     protected $guarded = [];
 
 
@@ -79,5 +89,22 @@ class Assignment extends Model
         $average = $this->comments()->whereNotNull('rating')->getBaseQuery()->average('rating');
 
         return round($average, 1);
+    }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saved(function (Assignment $assignment) {
+            if ($assignment->status === Assignment::STATUS['passed']) {
+                if ($assignment->assignee_user_id) {
+                    app(GamificationService::class)->issueNewBadges($assignment->assignee);
+                }
+                if ($assignment->assigner_user_id) {
+                    app(GamificationService::class)->issueNewBadges($assignment->assigner);
+                }
+            }
+        });
     }
 }
