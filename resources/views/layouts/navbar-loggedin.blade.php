@@ -15,9 +15,9 @@
         </div>
         <div class="show-lg" style="margin-top:3px;">
             <ul>
-                <a href="{{ route('logout') }}"><i class="fa fa-tasks"></i> {{ __('Assignments') }}</a>
-                <a href="{{ route('logout') }}"><i class="fa fa-list"></i> {{ __('Library') }}</a>
-                <a href="{{ route('logout') }}"><i class="fa fa-bell"></i> {{ __('Events') }}</a>
+                <a href="{{ url('/') }}"><i class="fa fa-tasks"></i> {{ __('Assignments') }}</a>
+                <a href="{{ url('/') }}"><i class="fa fa-list"></i> {{ __('Library') }}</a>
+                <a href="{{ url('/') }}"><i class="fa fa-bell"></i> {{ __('Events') }}</a>
             </ul>
 
         </div>
@@ -25,9 +25,10 @@
             <!-- Right Side Of Navbar -->
             <ul style="border-left: 1px solid #333;">
                 <!-- Authentication Links -->
-                <a href="{{ route('logout') }}">
-                    <i class="fa fa-gear"></i>
-                    <span class="hide-sm">{{ __('Settings') }}</span>
+                <a href="{{ url("/user/".\Auth::user()->id) }}">
+                    <img src="{{\Auth::user()->avatar}}" style="border-radius: 50%; max-height: 25px; max-width:25px;"
+                         class="fa "/>
+                    <span class="hide-sm"> {{\Auth::user()->points}} Points</span>
                 </a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); $('#logout-form').submit();">
                     <i class="fa fa-power-off"></i>
