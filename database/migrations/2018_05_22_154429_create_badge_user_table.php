@@ -9,7 +9,7 @@ class CreateBadgeUserTable extends Migration
     public function up()
     {
         Schema::create('badge_user', function (Blueprint $table) {
-            $table->string('badge_title');
+            $table->string('badge_title', 191);
             $table->integer('user_id')->unsigned();
             $table->timestamp('created_at');
 
