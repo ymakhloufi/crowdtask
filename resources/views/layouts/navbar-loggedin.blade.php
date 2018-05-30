@@ -25,9 +25,8 @@
             <!-- Right Side Of Navbar -->
             <ul style="border-left: 1px solid #333;">
                 <!-- Authentication Links -->
-                <a href="{{ url("/user/".\Auth::user()->id) }}">
-                    <img src="{{\Auth::user()->avatar}}" style="border-radius: 50%; max-height: 25px; max-width:25px;"
-                         class="fa "/>
+                <a href="{{ url("/users/".\Auth::user()->id) }}">
+                    <img src="{{\Auth::user()->avatar}}" class="fa avatar" style="max-height: 25px;"/>
                     <span class="hide-sm"> {{\Auth::user()->points}} Points</span>
                 </a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); $('#logout-form').submit();">
