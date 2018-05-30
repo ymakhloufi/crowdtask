@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12 guest-welcome-box">
+            <div class="col-md-12 content-box">
                 <div class="row">
                     <div class="col-md-6 login-left">
                         <h5 class="mb-0" style="text-align: center">I Have An Account</h5>
