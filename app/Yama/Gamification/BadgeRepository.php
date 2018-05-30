@@ -17,7 +17,14 @@ class BadgeRepository
             $allBadges = new Collection();
             foreach (config('badges') as $category => $badges) {
                 foreach ($badges as $title => $badge) {
-                    $allBadges->push(new Badge($category, $title, $badge['imageUrl'], $badge['points'], $badge['eval']));
+                    $allBadges->push(
+                        new Badge(
+                            $category,
+                            $title,
+                            $badge['imageUrl'],
+                            $badge['points'],
+                            $badge['eval'])
+                    );
                 }
             }
 

@@ -44,6 +44,9 @@ class User extends \Illuminate\Foundation\Auth\User
 
     protected $guarded = ['id', 'password'];
 
+    /** @var null|Collection $badges */
+    private $badges = null;
+
 
     public function tags(): BelongsToMany
     {
@@ -86,8 +89,11 @@ class User extends \Illuminate\Foundation\Auth\User
      */
     public function getBadges(): Collection
     {
-        $badgeTitles = \DB::table('badge_user')->where('user_id', $this->id)->pluck('title');
+        if ($this->badges === null) {
+            $badgeTitles  = \DB::table('badge_user')->where('user_id', $this->id)->pluck('title');
+            $this->badges = app(BadgeRepository::class)->all()->whereIn('title', $badgeTitles);
+        }
 
-        return app(BadgeRepository::class)->all()->whereIn('title', $badgeTitles);
+        return $this->badges;
     }
 }

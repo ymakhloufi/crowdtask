@@ -2,13 +2,14 @@
 
 namespace App\Yama\Gamification;
 
+use SuperClosure\Serializer;
 use Yama\User\User;
 
 class Badge
 {
     const CATEGORIES = [
-        'assigner'  => 'assigner',
-        'assignee'  => 'assignee',
+        'tutor'     => 'tutor',
+        'performer' => 'performer',
         'author'    => 'author',
         'commenter' => 'commenter',
         'rater'     => 'rater',
@@ -26,22 +27,22 @@ class Badge
     /** @var int */
     public $points;
 
-    /** @var \Closure */
-    public $eval;
+    /** @var string */
+    public $serializedEvalFunction;
 
 
-    public function __construct(int $category, string $title, string $imageUrl, int $points, \Closure $eval)
+    public function __construct(string $category, string $title, string $imageUrl, int $points, \Closure $evalFunction)
     {
-        $this->category = $category;
-        $this->title    = $title;
-        $this->imageUrl = $imageUrl;
-        $this->points   = $points;
-        $this->eval     = $eval;
+        $this->category               = $category;
+        $this->title                  = $title;
+        $this->imageUrl               = $imageUrl;
+        $this->points                 = $points;
+        $this->serializedEvalFunction = (new Serializer())->serialize($evalFunction);
     }
 
 
     public function userShouldHaveBadge(User $user)
     {
-        return ($this->eval)($user);
+        return (new Serializer())->unserialize($this->serializedEvalFunction)($user);
     }
 }
