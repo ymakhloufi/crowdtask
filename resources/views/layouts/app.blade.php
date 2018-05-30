@@ -9,7 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Built Assets -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -26,5 +25,13 @@
         @yield('content')
     </main>
 </div>
+
+
+<script src="{{ asset('js/app.js') }}"></script>
+<script language="JavaScript">
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+.star-ratings-sprite {
+  background: url("/img/ratingSpriteSmall.png") repeat-x;
+  font-size: 0;
+  height: 18px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 80px;
+  margin: 0 auto;
+  display: inline-block;
+  cursor: help;
+
+  &-rating {
+    background: url("/img/ratingSpriteSmall.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 15px;
+    display: block;
+  }
+}

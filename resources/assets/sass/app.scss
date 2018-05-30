@@ -2,8 +2,9 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~font-awesome/scss/font-awesome.scss";
 @import "variables";
-@import "navigation";
 @import "bootstrap-theme";
+@import "gamification";
+@import "navigation";
 
 html, body {
   background-color: $body-bg-color-fallback;
