@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             'email'       => 'change-me@example.org',
             'gender'      => 'female',
             'role'        => 'administrator',
-            'avatar'      => '/img/mallard.jpg',
+            'avatar'      => '/img/defaultAvatar.png',
             'description' => 'I am the owner of this website!',
         ]);
         $user->password = bcrypt($adminPassword);
