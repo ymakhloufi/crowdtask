@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Yama\Gamification;
+namespace Yama\Gamification;
 
 
 use Illuminate\Support\Collection;
+use Yama\Gamification\Badge;
 
 class BadgeRepository
 {
@@ -21,6 +22,7 @@ class BadgeRepository
                         new Badge(
                             $category,
                             $title,
+                            $badge['description'],
                             $badge['imageUrl'],
                             $badge['points'],
                             $badge['eval'])

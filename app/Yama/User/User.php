@@ -2,8 +2,6 @@
 
 namespace Yama\User;
 
-use App\Yama\Gamification\Badge;
-use App\Yama\Gamification\BadgeRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Yama\Assignment\Assignment;
 use Yama\Comment\Comment;
+use Yama\Gamification\BadgeRepository;
 use Yama\Tag\Tag;
 use Yama\Task\Task;
 
@@ -85,12 +84,12 @@ class User extends \Illuminate\Foundation\Auth\User
 
 
     /**
-     * @return Collection|Badge[]
+     * @return Collection|\Yama\Gamification\Badge[]
      */
     public function getBadges(): Collection
     {
-        if ($this->badges === null) {
-            $badgeTitles  = \DB::table('badge_user')->where('user_id', $this->id)->pluck('title');
+        if ($this->badges === null) {   // cache the result for using this during the same request
+            $badgeTitles  = \DB::table('badge_user')->where('user_id', $this->id)->pluck('badge_title');
             $this->badges = app(BadgeRepository::class)->all()->whereIn('title', $badgeTitles);
         }
 

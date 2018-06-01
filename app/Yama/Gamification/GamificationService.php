@@ -2,8 +2,8 @@
 
 namespace Yama\User;
 
-use App\Yama\Gamification\Badge;
-use App\Yama\Gamification\BadgeRepository;
+use Yama\Gamification\Badge;
+use Yama\Gamification\BadgeRepository;
 use Illuminate\Support\Carbon;
 use Yama\Assignment\Assignment;
 

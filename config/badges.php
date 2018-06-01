@@ -1,12 +1,12 @@
 <?php
 
-use App\Yama\Gamification\Badge;
+use Yama\Gamification\Badge;
 use Yama\User\User;
 
 return [
     Badge::CATEGORIES['tutor']  => [
         'Wannabe Tutor' => [
-            'description' => "Assigned 1 successfully performed assignments.",
+            'description' => "Assigned 1 successfully performed assignment.",
             'imageUrl'    => "/img/badges/tutor_1.png",
             'points'      => 10,
             'eval'        => function (User $user) {
@@ -102,7 +102,7 @@ return [
             'imageUrl'    => "/img/badges/author_1.png",
             'points'      => 25,
             'eval'        => function (User $user) {
-                return $user->authoredTasks()->where('status', 'passed')->exists();
+                return $user->authoredTasks()->whereNotNull('approved_at')->exists();
             },
         ],
 
@@ -111,7 +111,7 @@ return [
             'imageUrl'    => "/img/badges/author_3.png",
             'points'      => 50,
             'eval'        => function (User $user) {
-                return $user->authoredTasks()->where('status', 'passed')->count() >= 3;
+                return $user->authoredTasks()->whereNotNull('approved_at')->count() >= 3;
             },
         ],
 
@@ -120,7 +120,7 @@ return [
             'imageUrl'    => "/img/badges/author_6.png",
             'points'      => 100,
             'eval'        => function (User $user) {
-                return $user->authoredTasks()->where('status', 'passed')->count() >= 6;
+                return $user->authoredTasks()->whereNotNull('approved_at')->count() >= 6;
             },
         ],
 
@@ -129,7 +129,7 @@ return [
             'imageUrl'    => "/img/badges/author_10.png",
             'points'      => 250,
             'eval'        => function (User $user) {
-                return $user->authoredTasks()->where('status', 'passed')->count() >= 10;
+                return $user->authoredTasks()->whereNotNull('approved_at')->count() >= 10;
             },
         ],
 
@@ -138,7 +138,7 @@ return [
             'imageUrl'    => "/img/badges/author_15.png",
             'points'      => 500,
             'eval'        => function (User $user) {
-                return $user->authoredTasks()->where('status', 'passed')->count() >= 15;
+                return $user->authoredTasks()->whereNotNull('approved_at')->count() >= 15;
             },
         ],
     ],
@@ -207,7 +207,7 @@ return [
             },
         ],
 
-        'Assistance Rater' => [
+            'Assistance Rater' => [
             'description' => "Successfully rated 25 assignments.",
             'imageUrl'    => "/img/badges/rater_25.png",
             'points'      => 50,

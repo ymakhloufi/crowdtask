@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Yama\Gamification;
+namespace Yama\Gamification;
 
 use SuperClosure\Serializer;
 use Yama\User\User;
@@ -21,6 +21,9 @@ class Badge
     /** @var string */
     public $title;
 
+    /** @var string $description */
+    public $description;
+
     /** @var string */
     public $imageUrl;
 
@@ -31,10 +34,17 @@ class Badge
     public $serializedEvalFunction;
 
 
-    public function __construct(string $category, string $title, string $imageUrl, int $points, \Closure $evalFunction)
-    {
+    public function __construct(
+        string $category,
+        string $title,
+        string $description,
+        string $imageUrl,
+        int $points,
+        \Closure $evalFunction
+    ) {
         $this->category               = $category;
         $this->title                  = $title;
+        $this->description            = $description;
         $this->imageUrl               = $imageUrl;
         $this->points                 = $points;
         $this->serializedEvalFunction = (new Serializer())->serialize($evalFunction);
