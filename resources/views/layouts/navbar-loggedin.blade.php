@@ -23,7 +23,7 @@
         </div>
         <div class="links-right">
             <!-- Right Side Of Navbar -->
-            <ul style="border-left: 1px solid #333;">
+            <ul>
                 <!-- Authentication Links -->
                 <a href="{{ url("/users/".\Auth::user()->id) }}">
                     <img src="{{\Auth::user()->avatar}}" class="fa avatar" style="max-height: 25px;"/>

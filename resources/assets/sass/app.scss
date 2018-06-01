@@ -14,6 +14,7 @@ html, body {
   margin: 0;
   font-size: 11pt;
   height: 100%;
+  overflow-x: hidden;
 }
 
 a, a:visited, a:hover, a:active {
@@ -111,7 +112,7 @@ a:hover, a:active {
 .content-box {
   max-width: 930px;
   border-radius: 20px;
-  background-color: #191919;
+  background-color: rgba(25, 25, 25, 0.8);
   padding: 25px;
 }
 
