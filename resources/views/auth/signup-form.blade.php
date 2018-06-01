@@ -8,6 +8,7 @@
                name="_name"
                value="{{ old('_name') }}"
                placeholder="Your Name"
+               maxlength="32"
                required/>
     </div>
     @if ($errors->has('_name'))
@@ -21,6 +22,7 @@
                name="_email"
                value="{{ old('_email') }}"
                placeholder="Email"
+               maxlength="191"
                required/>
     </div>
     @if ($errors->has('_email'))
