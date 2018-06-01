@@ -82,13 +82,7 @@ class Assignment extends Model
 
     public function getRating(): ?float
     {
-        if (!$commentCount = $this->comments()->whereNotNull('rating')->pluck('rating')->count()) {
-            return null;
-        }
-
-        $average = $this->comments()->whereNotNull('rating')->getBaseQuery()->average('rating');
-
-        return round($average, 1);
+        return $this->comments()->whereNotNull('rating')->getBaseQuery()->average('rating');
     }
 
 

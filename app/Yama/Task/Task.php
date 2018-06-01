@@ -69,6 +69,20 @@ class Task extends Model
     }
 
 
+    public function getRating(): ?float
+    {
+        return $this->comments()->whereNotNull('rating')->getBaseQuery()->average('rating');
+    }
+
+
+    public function getShortDescription(): string
+    {
+        return strlen($this->description) > 200
+            ? substr($this->description, 0, 180) . "..."
+            : $this->description;
+    }
+
+
     public static function boot()
     {
         parent::boot();
