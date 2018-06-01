@@ -18,3 +18,11 @@
     display: block;
   }
 }
+
+.ct-badge {
+  width: 37px;
+
+  @media (min-width: 768px) {
+    width: 54px !important;
+  }
+}
